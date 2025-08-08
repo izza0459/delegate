@@ -689,7 +689,7 @@ const LoginView = ({ onLogin, setNotification }) => {
         e.preventDefault();
         setIsLoading(true);
         try {
-            const response = await fetch('${API_URL}/api/auth/login', {
+            const response = await fetch('https://delegate-fvy6.onrender.com/api/auth/login', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ username, password })
