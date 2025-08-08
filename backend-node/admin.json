@@ -1,0 +1,16 @@
+{
+  "mongoose": {
+    "User": {
+      "list": ["username"],
+      "edit": ["username", "password"],
+      "add": ["username", "password"]
+    },
+    "Delegate": {
+      "list": ["teamId", "delegateId", "name", "institution", "accommodation"],
+      "sort": ["teamId", "name"],
+      "search": ["teamId", "delegateId", "name", "cnic", "email"],
+      "edit": ["teamId", "delegateId", "status", "name", "cnic", "phone", "email", "institution", "stream", "accommodation", "arrival", "departure", "securityFeePaid", "accommCheckIn", "waiverCollected", "tagsCollected", "securityCheckIn"],
+      "add": ["teamId", "delegateId", "status", "name", "cnic", "phone", "email", "institution", "stream", "accommodation", "arrival", "departure"]
+    }
+  }
+}
