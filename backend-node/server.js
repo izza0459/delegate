@@ -5,6 +5,9 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 const app = express();
+app.get('/api/test', (req, res) => {
+  res.json({ message: 'API working! 🚀' });
+});
 const PORT = 8000;
 const JWT_SECRET = 'a-secret-string-that-should-be-in-an-env-file';
 
