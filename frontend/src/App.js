@@ -2,6 +2,7 @@ import React, { useState, useEffect, useMemo, useRef } from 'react';
 import { Html5QrcodeScanner } from 'html5-qrcode';
 
 // --- Helper Components ---
+const API_URL = process.env.REACT_APP_API_URL;
 
 const QrScannerModal = ({ show, onClose, onScanSuccess }) => {
     const scannerRef = useRef(null);
@@ -154,7 +155,7 @@ const OnSpotRegView = ({ setNotification }) => {
     }
     setIsLoading(true);
     try {
-      const response = await fetchWithTimeout(`/api/teams/search/?by=${searchBy}&term=${searchTerm}`);
+      const response = await fetchWithTimeout(`${API_URL}/api/teams/search/?by=${searchBy}&term=${searchTerm}`);
       if (!response.ok) throw new Error('Team not found');
       const data = await response.json();
       setOriginalTeam(data);
@@ -304,7 +305,7 @@ const AdminView = ({ setNotification }) => {
     setIsLoading(true);
     setDelegate(null);
     try {
-      const response = await fetchWithTimeout(`/api/delegates/search/?by=${searchBy}&term=${searchTerm}`);
+      const response = await fetchWithTimeout(`${API_URL}/api/delegates/search/?by=${searchBy}&term=${searchTerm}`);
       if (!response.ok) throw new Error('Delegate not found');
       const data = await response.json();
       setDelegate(data);
@@ -324,7 +325,7 @@ const AdminView = ({ setNotification }) => {
   const handleUpdate = async () => {
     setIsLoading(true);
     try {
-        const response = await fetch(`/api/delegates/${editableDelegate.delegateId}/`, {
+        const response = await fetch(`${API_URL}/api/delegates/${editableDelegate.delegateId}/`, {
             method: 'PATCH',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(editableDelegate)
@@ -374,7 +375,7 @@ const SecurityView = ({ setNotification }) => {
     if (!searchTerm.trim()) { setOriginalTeam(null); setModifiedTeam(null); return; }
     setIsLoading(true);
     try {
-      const response = await fetchWithTimeout(`/api/teams/search/?by=${searchBy}&term=${searchTerm}`);
+      const response = await fetchWithTimeout(`${API_URL}/api/teams/search/?by=${searchBy}&term=${searchTerm}`);
       if (!response.ok) throw new Error('Team not found');
       const data = await response.json();
       setOriginalTeam(data);
@@ -484,7 +485,7 @@ const SessionAttendanceView = ({ setNotification }) => {
         if (!searchTerm.trim()) { setOriginalTeam(null); setModifiedTeam(null); return; }
         setIsLoading(true);
         try {
-            const response = await fetchWithTimeout(`/api/teams/search/?by=${searchBy}&term=${searchTerm}`);
+            const response = await fetchWithTimeout(`${API_URL}/api/teams/search/?by=${searchBy}&term=${searchTerm}`);
             if (!response.ok) throw new Error('Team not found');
             const data = await response.json();
             setOriginalTeam(data);
@@ -581,7 +582,7 @@ const WorkshopAttendanceView = ({ setNotification }) => {
         if (!searchTerm.trim()) { setOriginalTeam(null); setModifiedTeam(null); return; }
         setIsLoading(true);
         try {
-            const response = await fetchWithTimeout(`/api/teams/search/?by=${searchBy}&term=${searchTerm}`);
+            const response = await fetchWithTimeout(`${API_URL}/api/teams/search/?by=${searchBy}&term=${searchTerm}`);
             if (!response.ok) throw new Error('Team not found');
             const data = await response.json();
             setOriginalTeam(data);
@@ -688,7 +689,7 @@ const LoginView = ({ onLogin, setNotification }) => {
         e.preventDefault();
         setIsLoading(true);
         try {
-            const response = await fetch('/api/auth/login', {
+            const response = await fetch('${API_URL}/api/auth/login', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ username, password })
